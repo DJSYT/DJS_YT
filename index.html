@@ -1,266 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cool Website</title>
-    <style>
-        /* General Styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            background-color: #f4f4f4;
-            transition: background 0.5s, color 0.5s;
-        }
-        
-        /* Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: #333;
-            color: white;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .menu-toggle div {
-            width: 30px;
-            height: 3px;
-            background: white;
-            margin: 5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Responsive Navigation */
-        @media (max-width: 600px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                background: #333;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-        }
-
-        /* Smooth Scroll & Animations */
-        .section {
-            padding: 50px;
-            transition: transform 0.5s, opacity 0.5s;
-        }
-
-        .section:hover {
-            transform: scale(1.05);
-        }
-
-        /* Dark Mode */
-        .dark-mode {
-            background: #222;
-            color: white;
-        }
-
-        .toggle-dark {
-            padding: 10px 20px;
-            background: blue;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin: 20px;
-        }
-
-        /* Live Clock */
-        .clock {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 10px;
-        }
-
-        /* Loading Animation */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Quote Generator */
-        .quote {
-            font-size: 18px;
-            font-style: italic;
-            margin: 20px;
-        }
-
-        /* Visitor Counter */
-        .counter {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 20px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Preloader -->
-    <div class="loader" id="loader">
-        <h2>Loading...</h2>
-    </div>
-
-    <!-- Navigation -->
-    <div class="navbar">
-        <h2>My Cool Website</h2>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </div>
-    </div>
-
-    <!-- Welcome Section -->
-    <div class="section">
-        <h1>Welcome to My Cool Website!</h1>
-        <p class="clock" id="clock"></p>
-        <button class="toggle-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-        <p class="quote" id="quote"></p>
-        <p class="counter" id="counter">Visitors: 0</p>
-    </div>
-
-    <script>
-        // Preloader
-        window.onload = function () {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1000);
-        };
-
-        // Hamburger Menu
-        function toggleMenu() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        }
-
-        // Dark Mode Toggle
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-        }
-
-        // Remember Dark Mode
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            document.body.classList.add('dark-mode');
-        }
-
-        // Live Clock
-        function updateClock() {
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString();
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Quote Generator
-        const quotes = [
-            "The best way to get started is to quit talking and begin doing.",
-            "Don’t let yesterday take up too much of today.",
-            "The only limit to our realization of tomorrow is our doubts of today.",
-            "Creativity is intelligence having fun."
-        ];
-
-        function randomQuote() {
-            document.getElementById('quote').innerText = quotes[Math.floor(Math.random() * quotes.length)];
-        }
-        randomQuote();
-
-        // Visitor Counter
-        let count = localStorage.getItem('visitorCount') ? parseInt(localStorage.getItem('visitorCount')) : 0;
-        count++;
-        localStorage.setItem('visitorCount', count);
-        document.getElementById('counter').innerText = "Visitors: " + count;
-    </script>
-</body>
-</html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Links</title>
+    <title>DJS_YT Floating Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
             text-align: center;
-            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            height: 500px;
+            margin: auto;
+            margin-top: 50px;
+            border: 3px solid white;
+            border-radius: 15px;
+            background-color: #222;
             padding: 20px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
-        .button {
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        .social-links {
+            margin-top: 15px;
+        }
+        .social-links a {
             display: block;
-            width: 200px;
-            padding: 10px;
-            margin: 10px auto;
-            border: none;
+            margin: 5px;
+            padding: 8px;
             border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
             color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
         }
-        .youtube {
-            background-color: #FF0000;
+        .youtube { background-color: red; }
+        .discord { background-color: #7289DA; }
+        .github { background-color: black; }
+        .roblox { background-color: gray; }
+        .floating-text {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: bold;
+            background: #222;
+            padding: 5px 10px;
+            border-radius: 10px;
+            border: 2px solid white;
+            animation: float 3s infinite alternate ease-in-out;
         }
-        .discord {
-            background-color: #5865F2;
+        @keyframes float {
+            from { transform: translate(-50%, -10px); }
+            to { transform: translate(-50%, 10px); }
         }
-        .roblox {
-            background-color: #242424;
+        .video-container {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-
-    <h1>My Social Links</h1>
-
-    <a href="https://youtube.com/@patsim_99?si=HGrYnrr0AgKNaELd" target="_blank" class="button youtube">YouTube</a>
-    <a href="https://discord.gg/VXHt3uZe" target="_blank" class="button discord">My Discord</a>
-    <a href="https://www.roblox.com/users/5303639741/profile" target="_blank" class="button roblox">Roblox</a>
-    <a href="https://discord.gg/jVQgDgSk" target="_blank" class="button discord">SoulzPlayz's Discord</a>
-    
+    <div class="container">
+        <div class="floating-text">Welcome to DJS_YT</div>
+        <img src="your-profile-pic-url.jpg" alt="Profile Picture" class="profile-img">
+        <h2>DJS_YT</h2>
+        <div class="social-links">
+            <a href="https://youtube.com/<@1219275471561429007>?si=N-8EUeBZNK9sOm4s" class="youtube">YouTube</a>
+            <a href="https://youtube.com/@djs_annimeation?si=RMoPIx4zBbOh9vrz" class="youtube">Second YouTube</a>
+            <a href="https://youtube.com/@djs_edit-z5p?si=4Tt_74QaxwdFi6ev" class="youtube">Third YouTube</a>
+            <a href="https://discord.gg/dFCYqcs8" class="discord">Discord</a>
+            <a href="https://github.com/DJSYT" class="github">GitHub</a>
+            <a href="https://www.roblox.com/users/5303639741/profile" class="roblox">Roblox</a>
+        </div>
+        <div class="video-container">
+            <iframe width="300" height="200" src="https://youtu.be/rF447lQ1sbk?si=om0bEppARnlFdJLF" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
 </body>
 </html>
